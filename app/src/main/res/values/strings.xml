@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ShtrihCodeLog</string>
+    <string name="HelloStrih">Введите штрихкод:</string>
+    <string name="app_name">ShtrihCode</string>
+    <string name="Validation">Проверка</string>
 </resources>
