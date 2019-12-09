@@ -3,16 +3,25 @@ package ru.athex.shtrihcodelog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
     private EditText tbValidation;
     private TextView lbValidationInfo;
     private TextView lbProducerInfo;
     private ConstraintLayout llAll;
+
+    private Button scanBtn;
+    private TextView formatTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         tbValidation= (EditText)findViewById(R.id.tbValidation);
         lbProducerInfo = (TextView)findViewById(R.id.lbProducerInfo);
         lbValidationInfo = (TextView)findViewById(R.id.lbValidationInfo);
+
+        scanBtn = (Button)findViewById(R.id.scan_button);
+        formatTxt = (TextView)findViewById(R.id.scan_format);
     }
 
 
@@ -62,6 +74,30 @@ public class MainActivity extends AppCompatActivity {
             return true;
         return false;
     }
+
+
+    public void btnScan_Click(View v)
+    {
+            IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+            scanIntegrator.initiateScan();
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanningResult != null) {
+            String scanContent = scanningResult.getContents();
+            String scanFormat = scanningResult.getFormatName();
+            tbValidation.setText(scanContent);
+            formatTxt.setText("FORMAT: " + scanFormat);
+        }
+        else{
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
 
     public String ProducerInfo(String In)
     {

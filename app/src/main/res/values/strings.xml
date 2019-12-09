@@ -2,4 +2,5 @@
     <string name="HelloStrih">Введите штрихкод:</string>
     <string name="app_name">ShtrihCode</string>
     <string name="Validation">Проверка</string>
+    <string name="scan">Scan</string>
 </resources>
