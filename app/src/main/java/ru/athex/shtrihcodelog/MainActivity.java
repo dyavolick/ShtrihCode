@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         int ProducerCode = Integer.parseInt(In.substring(0, 3));
 
         if ((ProducerCode >= 000) && (ProducerCode <= 139)) { return "США, Канада"; }//00-09
-
+        else if ((ProducerCode >= 200) && (ProducerCode <= 299)) { return "Внутренний код организации"; }
         else if ((ProducerCode >= 300) && (ProducerCode <= 379)) { return "Франция"; }//30-37
         else if (ProducerCode == 380) { return "Болгария"; }//380
         else if (ProducerCode == 383) { return "Словения"; }//383
